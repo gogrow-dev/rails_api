@@ -1,24 +1,8 @@
-# README
+# GoGrow Rails API boilerplate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is Gogrow's Rails API boilerplate.
 
-Things you may want to cover:
+## Usage
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Fork the repository
+2. Run the setup wizard by running `bin/setup` and following the instructions.
