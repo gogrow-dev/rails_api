@@ -16,5 +16,6 @@ group :development, :test do
 end
 
 group :development do
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'spring', '~> 4.0'
 end
