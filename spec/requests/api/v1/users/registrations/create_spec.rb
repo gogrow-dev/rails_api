@@ -1,0 +1,86 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
+  let(:user) { attributes_for(:user) }
+  let(:headers) { { 'Accept' => 'application/json' } }
+
+  context 'when user is valid' do
+    before do
+      post user_registration_path, params: { user: }, headers:
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'returns the user data' do
+      expect(json_response[:data][:id]).not_to eq(nil)
+      expect(json_response[:data][:email]).to eq(user[:email])
+      expect(json_response[:data][:uid]).to eq(user[:email])
+    end
+  end
+
+  context 'when the user already exists' do
+    let!(:existing_user) { create(:user, email: user[:email]) }
+
+    subject { post user_registration_path, params: { user: }, headers: }
+
+    it 'returns status code 422' do
+      subject
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it 'returns the validation errors' do
+      subject
+      expect(json_response[:errors][:full_messages]).to eq(['Email has already been taken'])
+    end
+
+    it 'does not create a user' do
+      expect { subject }.not_to change(User, :count)
+    end
+  end
+
+  context 'when the user is invalid' do
+    before do
+      post user_registration_path, params: { user: { email:, password: } }, headers:
+    end
+
+    let(:email) { 'example@email.com' }
+    let(:password) { 'Password1.' }
+
+    context 'when the email is invalid' do
+      let(:email) { 'invalid_email' }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'returns the validation errors' do
+        expect(json_response[:errors][:full_messages]).to eq(['Email is not an email'])
+      end
+
+      it 'does not create a user' do
+        expect {}.not_to change(User, :count)
+      end
+    end
+
+    context 'when the password is invalid' do
+      let(:password) { 'short' }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'returns the validation errors' do
+        expect(json_response[:errors][:full_messages]).to eq(['Password is too short (minimum is 6 characters)',
+                                                              'Password is too short (minimum is 6 characters)'])
+      end
+
+      it 'does not create a user' do
+        expect {}.not_to change(User, :count)
+      end
+    end
+  end
+end
