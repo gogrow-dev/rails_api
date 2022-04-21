@@ -16,9 +16,9 @@ RSpec.describe 'POST /api/v1/users/sign_in', type: :request do
     end
 
     it 'returns the user data' do
-      expect(json_response[:data][:id]).not_to eq(nil)
-      expect(json_response[:data][:email]).to eq(user.email)
-      expect(json_response[:data][:uid]).to eq(user.email)
+      expect(json_response[:data][:attributes][:id]).not_to eq(nil)
+      expect(json_response[:data][:attributes][:email]).to eq(user.email)
+      expect(json_response[:data][:attributes][:uid]).to eq(user.email)
     end
 
     it 'returns the auth headers' do
@@ -37,7 +37,7 @@ RSpec.describe 'POST /api/v1/users/sign_in', type: :request do
       end
 
       it 'returns the json data for the errors' do
-        expect(json_response[:errors]).to eq(['Invalid login credentials. Please try again.'])
+        expect(error_details).to eq(['Invalid login credentials. Please try again.'])
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe 'POST /api/v1/users/sign_in', type: :request do
       end
 
       it 'returns the json data for the errors' do
-        expect(json_response[:errors]).to eq(['Invalid login credentials. Please try again.'])
+        expect(error_details).to eq(['Invalid login credentials. Please try again.'])
       end
     end
   end
