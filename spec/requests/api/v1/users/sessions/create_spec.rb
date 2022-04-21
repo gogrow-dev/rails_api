@@ -7,7 +7,7 @@ RSpec.describe 'POST /api/v1/users/sign_in', type: :request do
   let(:params) { { user: { email: user.email, password: user.password } } }
 
   before do
-    post user_session_path, params:, headers:
+    post user_session_path, params:, as: :json
   end
 
   context 'when user credentials are valid' do

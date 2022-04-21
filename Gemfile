@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -21,6 +23,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rubocop-rails', '~> 2.14', '>= 2.14.2', require: false
+  gem 'rubocop-rspec', '~> 2.10', require: false
   gem 'shoulda-matchers', '~> 5.0'
   gem 'spring', '~> 4.0'
 end
