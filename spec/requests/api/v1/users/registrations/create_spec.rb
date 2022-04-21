@@ -17,8 +17,8 @@ RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
 
     it 'returns the user data' do
       expect(json_response[:data][:id]).not_to eq(nil)
-      expect(json_response[:data][:email]).to eq(user[:email])
-      expect(json_response[:data][:uid]).to eq(user[:email])
+      expect(json_response[:data][:attributes][:email]).to eq(user[:email])
+      expect(json_response[:data][:attributes][:uid]).to eq(user[:email])
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
     end
 
     it 'returns the validation errors' do
-      expect(json_response[:errors][:full_messages]).to eq(['Email has already been taken'])
+      expect(error_details).to eq(['Email has already been taken'])
     end
 
     it 'does not create a user' do
@@ -57,7 +57,7 @@ RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
       end
 
       it 'returns the validation errors' do
-        expect(json_response[:errors][:full_messages]).to eq(['Email is not an email'])
+        expect(error_details).to eq(['Email is not an email'])
       end
 
       it 'does not create a user' do
@@ -73,8 +73,8 @@ RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
       end
 
       it 'returns the validation errors' do
-        expect(json_response[:errors][:full_messages]).to eq(['Password is too short (minimum is 6 characters)',
-                                                              'Password is too short (minimum is 6 characters)'])
+        expect(error_details).to eq(['Password is too short (minimum is 6 characters)',
+                                     'Password is too short (minimum is 6 characters)'])
       end
 
       it 'does not create a user' do

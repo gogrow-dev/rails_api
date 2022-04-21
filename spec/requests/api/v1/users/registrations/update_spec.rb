@@ -29,8 +29,8 @@ RSpec.describe 'PUT /api/v1/users/sign_up', type: :request do
 
       it 'returns the user data' do
         expect(json_response[:data][:id]).not_to eq(nil)
-        expect(json_response[:data][:email]).to eq(user.email)
-        expect(json_response[:data][:uid]).to eq(user.email)
+        expect(json_response[:data][:attributes][:email]).to eq(user.email)
+        expect(json_response[:data][:attributes][:uid]).to eq(user.email)
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe 'PUT /api/v1/users/sign_up', type: :request do
       end
 
       it 'returns the json data for the errors' do
-        expect(json_response[:errors][:full_messages]).to eq(['Email is not an email'])
+        expect(error_details).to eq(['Email is not an email'])
       end
     end
 
@@ -55,8 +55,8 @@ RSpec.describe 'PUT /api/v1/users/sign_up', type: :request do
       end
 
       it 'returns the json data for the errors' do
-        expect(json_response[:errors][:full_messages]).to eq(['Password confirmation doesn\'t match Password',
-                                                              'Password confirmation doesn\'t match Password'])
+        expect(error_details).to eq(['Password confirmation doesn\'t match Password',
+                                     'Password confirmation doesn\'t match Password'])
       end
     end
   end

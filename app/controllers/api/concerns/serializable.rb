@@ -18,6 +18,15 @@ module Api
         attributes.to_json
       end
 
+      def render_generic_error(error_message, status: :bad_request)
+        render json: {
+          errors: [{
+            detail: error_message,
+            source: { pointer: '' }
+          }]
+        }.to_json, status:
+      end
+
       def generic_error(error_message)
         {
           errors: [{
