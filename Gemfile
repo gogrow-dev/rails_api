@@ -24,6 +24,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rspec_junit_formatter', '~> 0.5.1'
   gem 'rubocop-rails', '~> 2.14', '>= 2.14.2', require: false
   gem 'rubocop-rspec', '~> 2.10', require: false
   gem 'shoulda-matchers', '~> 5.0'
