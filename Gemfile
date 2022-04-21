@@ -9,6 +9,7 @@ gem 'bootsnap', require: false
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'devise_token_auth', '~> 1.2', github: 'lynndylanhurley/devise_token_auth',
                                    ref: '5b1a5e19450f3755ce5ebe2f631b40c876ffc22d'
+gem 'jsonapi-serializer', '~> 2.2'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
