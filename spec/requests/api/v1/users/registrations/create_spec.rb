@@ -8,7 +8,7 @@ RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
 
   context 'when user is valid' do
     before do
-      post user_registration_path, params: { user: }, headers:
+      post user_registration_path, params: { user: }, as: :json
     end
 
     it 'returns status code 200' do
@@ -23,28 +23,27 @@ RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
   end
 
   context 'when the user already exists' do
-    let!(:existing_user) { create(:user, email: user[:email]) }
-
-    subject { post user_registration_path, params: { user: }, headers: }
+    subject! do
+      create(:user, email: user[:email])
+      post user_registration_path, params: { user: }, as: :json
+    end
 
     it 'returns status code 422' do
-      subject
       expect(response).to have_http_status(:unprocessable_entity)
     end
 
     it 'returns the validation errors' do
-      subject
       expect(json_response[:errors][:full_messages]).to eq(['Email has already been taken'])
     end
 
     it 'does not create a user' do
-      expect { subject }.not_to change(User, :count)
+      expect {}.not_to change(User, :count)
     end
   end
 
   context 'when the user is invalid' do
     before do
-      post user_registration_path, params: { user: { email:, password: } }, headers:
+      post user_registration_path, params: { user: { email:, password: } }, as: :json
     end
 
     let(:email) { 'example@email.com' }
