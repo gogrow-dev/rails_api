@@ -1,0 +1,102 @@
+version: '3.0'
+
+services:
+  web:
+    build: .
+    environment:
+      RAILS_API_DATABASE_USER: "${RAILS_API_DATABASE_USER}"
+      RAILS_API_DATABASE_PASSWORD: "${RAILS_API_DATABASE_PASSWORD}"
+      DB_HOST: db
+      REDIS_HOST: redis
+    entrypoint: >
+      bash -c "
+      rm -f tmp/pids/server.pid
+      && bundle exec rails s -b 0.0.0.0 -p 3000"
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/src/myapp
+    depends_on:
+      - db
+      # - redis
+    links:
+      - db:db
+      # - redis:redis
+    networks:
+      - rails_api_network
+
+  # If you want to add a sidekiq worker, uncomment the following service
+  # Make sure to also uncomment redis
+  # worker:
+  #   build: .
+  #   environment:
+  #     DB_HOST: db
+  #     REDIS_HOST: redis
+  #   entrypoint: >
+  #     bash -c "bundle exec sidekiq"
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   links:
+  #     - db:db
+  #     - redis:redis
+  #   networks:
+  #     - rails_api_network
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: "${RAILS_API_DATABASE_USER}"
+      POSTGRES_PASSWORD: "${RAILS_API_DATABASE_PASSWORD}"
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - rails_api_network
+    ports:
+      - 5432:5432
+
+  # If you want to add a redis container to your Rails API, uncomment the
+  # following lines and add your redis container name to the depends_on
+  # section of the web container.
+  # redis:
+  #   image: redis:6.2
+  #   networks:
+  #     - rails_api_network
+  #   ports:
+  #     - 6379:6379
+  #   volumes:
+  #     - redis_data:/var/lib/redis
+
+  db_tool_base: &db_tools
+    build: .
+    environment:
+      DB_HOST: db
+      RAILS_API_DATABASE_USER: "${RAILS_API_DATABASE_USER}"
+      RAILS_API_DATABASE_PASSWORD: "${RAILS_API_DATABASE_PASSWORD}"
+    depends_on:
+      - db
+    networks:
+      - rails_api_network
+    profiles:
+      - tools
+
+  db_create:
+    <<: *db_tools
+    entrypoint: >
+      bash -c "
+      rails db:create"
+
+  db_migrate:
+    <<: *db_tools
+    entrypoint: >
+      bash -c "
+      rails db:migrate"
+
+volumes:
+  db_data:
+    external: true
+  # redis_data:
+  #   external: true
+
+networks:
+  rails_api_network:
