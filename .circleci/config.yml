@@ -16,13 +16,13 @@ jobs:
       - image: cimg/ruby:3.1.1
     steps:
       - checkout
-      - ruby/install-deps
       - run:
           name: touch .env.test
           command: touch .env.test
       - run:
           name: Load env from .env.test
           command: 'cat .env.test | awk ''{print "export " $0}'' >> $BASH_ENV'
+      - ruby/install-deps
       - ruby/rubocop-check:
           format: progress
           label: Inspecting with Rubocop
@@ -45,13 +45,13 @@ jobs:
     parallelism: 4
     steps:
       - checkout
-      - ruby/install-deps
       - run:
           name: touch .env.test
           command: touch .env.test
       - run:
           name: Load env from .env.test
           command: 'cat .env.test | awk ''{print "export " $0}'' >> $BASH_ENV'
+      - ruby/install-deps
       - run:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
           name: Wait for DB
