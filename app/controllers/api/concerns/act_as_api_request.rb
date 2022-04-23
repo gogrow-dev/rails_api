@@ -7,7 +7,6 @@ module Api
 
       included do
         extend DeviseTokenAuth::Concerns::SetUserByToken
-        skip_before_action :verify_authenticity_token
         before_action :skip_session_storage
       end
 
