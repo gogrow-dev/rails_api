@@ -11,7 +11,7 @@ module Helpers
     end
 
     def error_attributes
-      json_response[:errors].map { |error_hsh| error_hsh[:source][:parameter] }
+      json_response[:errors].map { |error_hsh| error_hsh[:source][:parameter].to_sym }
     end
   end
 end
