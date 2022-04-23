@@ -7,10 +7,12 @@ ruby '3.1.1'
 gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
 
 gem 'activeadmin', '~> 2.12'
+gem 'aws-sdk-s3', '~> 1.113'
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'devise_token_auth', '~> 1.2', github: 'lynndylanhurley/devise_token_auth',
                                    ref: '5b1a5e19450f3755ce5ebe2f631b40c876ffc22d'
+gem 'image_processing', '~> 1.12', '>= 1.12.2'
 gem 'jsonapi-serializer', '~> 2.2'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
