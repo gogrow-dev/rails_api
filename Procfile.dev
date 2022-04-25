@@ -1,1 +1,3 @@
 web: bin/rails server -p 3000
+worker: bin/sidekiq -e ${RACK_ENV:-development}
+redis: redis-server

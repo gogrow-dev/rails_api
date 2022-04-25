@@ -17,7 +17,9 @@ gem 'jsonapi-serializer', '~> 2.2'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+gem 'redis', '~> 4.6'
 gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
+gem 'sidekiq', '~> 6.4', '>= 6.4.2'
 gem 'sprockets-rails', '~> 3.4', '>= 3.4.2'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 

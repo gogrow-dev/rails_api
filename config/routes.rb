@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -8,4 +10,6 @@ Rails.application.routes.draw do
     registrations: 'api/v1/users/registrations',
     passwords: 'api/v1/users/passwords'
   }
+
+  mount Sidekiq::Web => '/sidekiq' if Rails.env.development?
 end

@@ -15,12 +15,16 @@ There are 2 methods to start the server and all its services locally:
 
 ```shell
 bin/rails s -p 3000
+bin/sidekiq
+redis-server
 ```
 
 2. run the services manually in sepparate terminals:
 
 ```shell
+redis-server # (this needs to be ran before sidekiq)
 rails s # (or `bin/rails s` or `bundle exec rails s`)
+sidekiq # (or `bin/sidekiq` or `bundle exec sidekiq`)
 ```
 
 ## Test helpers

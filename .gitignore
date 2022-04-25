@@ -37,3 +37,6 @@ config/database.yml
 .env.test.local
 .env.production.local
 .env.local
+
+# redis db dump
+dump.rdb
