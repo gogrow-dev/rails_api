@@ -35,10 +35,6 @@ RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
     it 'returns the validation errors' do
       expect(error_details).to eq(['Email has already been taken'])
     end
-
-    it 'does not create a user' do
-      expect {}.not_to change(User, :count)
-    end
   end
 
   context 'when the user is invalid' do
@@ -75,10 +71,6 @@ RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
       it 'returns the validation errors' do
         expect(error_details).to eq(['Password is too short (minimum is 6 characters)',
                                      'Password is too short (minimum is 6 characters)'])
-      end
-
-      it 'does not create a user' do
-        expect {}.not_to change(User, :count)
       end
     end
   end
