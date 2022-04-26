@@ -62,15 +62,8 @@ jobs:
           command: bundle exec rails db:schema:load --trace
           name: Database setup
       - ruby/rspec-test
-  deploy_to_heroku:
-    steps:
-      - checkout
-      - heroku/deploy-via-git:
-          filters:
-            branches:
-              only: main
 workflows:
-  build_and_test:
+  build_test_and_deploy:
     jobs:
       - build
       - static_analysis:
@@ -79,10 +72,11 @@ workflows:
       - test:
           requires:
             - build
-  heroku_deploy:
-    jobs:
-      - deploy_to_heroku:
+      - heroku/deploy-via-git:
           requires:
             - build
             - static_analysis
             - test
+          filters:
+            branches:
+              only: main
