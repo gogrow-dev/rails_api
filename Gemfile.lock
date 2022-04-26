@@ -363,6 +363,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 2.12)
   arctic_admin (~> 4.0.1.alpha)
+  addressable (~> 2.8)
   aws-sdk-s3 (~> 1.113)
   bootsnap
   bullet (~> 7.0, >= 7.0.1)

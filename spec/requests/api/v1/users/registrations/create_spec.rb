@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe 'POST /api/v1/users/sign_up', type: :request do
   let(:user) { attributes_for(:user) }
-  let(:headers) { { 'Accept' => 'application/json' } }
 
   context 'when user is valid' do
     before do

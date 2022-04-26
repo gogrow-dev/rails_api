@@ -42,3 +42,7 @@ group :development do
   gem 'shoulda-matchers', '~> 5.0'
   gem 'spring', '~> 4.0'
 end
+
+group :test do
+  gem 'addressable', '~> 2.8'
+end
