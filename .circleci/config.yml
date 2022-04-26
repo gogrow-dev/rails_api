@@ -1,6 +1,7 @@
 version: "2.1"
 orbs:
   ruby: circleci/ruby@1.7.1
+  heroku: circleci/heroku@1.2.6
 jobs:
   build:
     docker:
@@ -62,7 +63,7 @@ jobs:
           name: Database setup
       - ruby/rspec-test
 workflows:
-  build_and_test:
+  build_test_and_deploy:
     jobs:
       - build
       - static_analysis:
@@ -71,3 +72,11 @@ workflows:
       - test:
           requires:
             - build
+      - heroku/deploy-via-git:
+          requires:
+            - build
+            - static_analysis
+            - test
+          filters:
+            branches:
+              only: main
