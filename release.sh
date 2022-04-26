@@ -3,7 +3,7 @@
 
 ENVIRONMENT_TASKS = {
   'review' => ['bundle exec rails db:migrate', 'bundle exec rails db:seed'],
-  'staging' => ['bundle exec rails db:migrate']
+  'staging' => ['bundle exec rails db:migrate'],
   'production' => ['bundle exec rails db:migrate']
 }.freeze
 
