@@ -40,3 +40,6 @@ config/database.yml
 
 # redis db dump
 dump.rdb
+
+# ignore compiled assets
+/public/assets
