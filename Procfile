@@ -1,3 +1,3 @@
 release: ./release.sh
-web: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
-worker: bundle exec sidekiq -e ${RACK_ENV:-development}
+web: bin/rails s -p ${PORT:-3000} -e ${RACK_ENV:-development}
+worker: bin/sidekiq -e ${RACK_ENV:-development}
