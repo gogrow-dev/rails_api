@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe 'PUT /api/v1/users/passwords', type: :request do
   subject! { put user_password_path(reset_password_token:), params:, as: :json }
 

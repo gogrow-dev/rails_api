@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe 'POST /api/v1/users/passwords', type: :request do
   let(:user) { create(:user, :confirmed) }
 
