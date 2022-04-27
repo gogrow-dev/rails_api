@@ -33,6 +33,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener', '~> 1.8', '>= 1.8.1'
+  gem 'letter_opener_web', '~> 2.0'
   gem 'rspec_junit_formatter', '~> 0.5.1'
   gem 'rubocop-rails', '~> 2.14', '>= 2.14.2', require: false
   gem 'rubocop-rspec', '~> 2.10', require: false
