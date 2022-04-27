@@ -53,9 +53,9 @@ DeviseTokenAuth.setup do |config|
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # config.enable_standard_devise_support = false
 
-  config.default_confirm_success_url = ''
+  config.default_confirm_success_url = ENV.fetch('DEFAULT_CONFIRM_SUCCESS_URL', 'http://localhost:3000/')
   # By default DeviseTokenAuth will not send confirmation email, even when including
   # devise confirmable module. If you want to use devise confirmable module and
   # send email, set it to true. (This is a setting for compatibility)
-  # config.send_confirmation_email = true
+  config.send_confirmation_email = true
 end
