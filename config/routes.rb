@@ -11,5 +11,14 @@ Rails.application.routes.draw do
     passwords: 'api/v1/users/passwords'
   }
 
-  mount Sidekiq::Web => '/sidekiq' if Rails.env.development?
+  if Rails.env.development?
+    mount Sidekiq::Web => '/sidekiq'
+    mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  end
+
+  namespace :api do
+    namespace :v1 do
+      match '*unmatched', to: '/api/api#route_not_found', via: :all
+    end
+  end
 end
