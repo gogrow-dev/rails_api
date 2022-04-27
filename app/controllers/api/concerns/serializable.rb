@@ -11,18 +11,17 @@ module Api
       end
 
       def serialize(record, serializer_class: nil, serializer_namespace: nil, options: {})
-        attributes = serializer_klass(record, serializer_class, serializer_namespace)
-                     .new(record, options)
-                     .serializable_hash
-        attributes[:errors] = serialized_error(record) if record.errors.any?
-        attributes.to_json
+        return { errors: serialized_error(record) } if record.errors.any?
+
+        serializer_klass(record, serializer_class, serializer_namespace)
+          .new(record, options)
+          .serializable_hash.to_json
       end
 
       def render_generic_error(error_message, status: :bad_request)
         render json: {
           errors: [{
-            detail: error_message,
-            source: { pointer: '' }
+            detail: error_message
           }]
         }.to_json, status:
       end
@@ -48,6 +47,8 @@ module Api
       end
 
       def pointer_for(key)
+        return '' if key.empty?
+
         "data/attributes/#{key}"
       end
 
