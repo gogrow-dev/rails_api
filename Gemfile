@@ -7,6 +7,7 @@ ruby '3.1.1'
 gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
 
 gem 'activeadmin', '~> 2.12'
+gem 'arctic_admin', '~> 4.0.1.alpha'
 gem 'aws-sdk-s3', '~> 1.113'
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.8', '>= 4.8.1'

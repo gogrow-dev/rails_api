@@ -90,6 +90,9 @@ GEM
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
+    arctic_admin (4.0.1.alpha)
+      activeadmin (>= 1.1.0, < 3.0)
+      font-awesome-sass (~> 5.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.579.0)
@@ -140,6 +143,8 @@ GEM
     faker (2.20.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
+    font-awesome-sass (5.15.1)
+      sassc (>= 1.11)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
     formtastic_i18n (0.7.0)
@@ -357,6 +362,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin (~> 2.12)
+  arctic_admin (~> 4.0.1.alpha)
   aws-sdk-s3 (~> 1.113)
   bootsnap
   bullet (~> 7.0, >= 7.0.1)
