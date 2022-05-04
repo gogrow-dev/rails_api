@@ -28,5 +28,8 @@ module RailsApi
 
     # config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+
+    # protect from forgery
+    config.action_controller.default_protect_from_forgery = true
   end
 end
