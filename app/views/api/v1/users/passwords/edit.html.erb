@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Reset Password</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  </head>
+
+  <body>
+    <div>
+      <h1><%= t('reset_pwd.text.title') %></h1>
+      <% if @resource.nil? %>
+        <h1><%=t('reset_pwd.text.errors')%></h1>
+        <p><%= t('reset_pwd.text.user_not_found') %></p>
+      <% else %>
+        <div>
+          <% if @resource && @resource.errors.any? %>
+            <h1><%= t('reset_pwd.text.errors') %></h1>
+            <p><%= @resource.errors.full_messages.join(',') %></p>
+          <% elsif @success %>
+            <p><%= t('reset_pwd.text.success') %></p>
+          <% end %>
+          <%= form_for(@resource, as: '', url: user_password_path(@resource, reset_password_token: params[:reset_password_token]), method: :put, remote: true) do |f| %>
+          <%= f.hidden_field :reset_password_token %>
+          <div>
+            <%= f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: t('reset_pwd.text.new_pwd') %>
+          </div>
+          <div>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: t('reset_pwd.text.confirm_pwd') %>
+          </div>
+          <div>
+            <%= f.submit t('reset_pwd.text.update') %>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

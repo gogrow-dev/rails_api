@@ -31,3 +31,12 @@
 
 en:
   hello: "Hello world"
+  reset_pwd:
+    text:
+      title: "Reset Password"
+      errors: "Errors"
+      success: "Password Updated Succesfully"
+      update: "Update Password"
+      new_pwd: "New Password"
+      confirm_pwd: "Confirm Password"
+      user_not_found: "User not found"
