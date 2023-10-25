@@ -24,16 +24,6 @@ This base uses Github Actions by default as the CI tool.
 
 There's no need to setup anything, just push your code and it will run the tests.
 
-## CircleCI Setup
-
-### Prerequisites
-
-- Create a new project in CircleCI
-
-### Setup
-
-- run: `mv .circleci/config.yml.bak .circleci/config.yml`
-
 ---
 
 # Deployment
@@ -170,7 +160,11 @@ kamal deploy
 
 ## Deploy to Heroku
 
-The repository is already configured to deploy to Heroku.
+The repository has a generator that creates all the necessary files for deploying into heroku. Just run:
+
+```bash
+bin/rails g heroku --app-name=<your-heroku-app-name>
+```
 
 The cost of deploying this to heroku is **18 USD/month**.
 

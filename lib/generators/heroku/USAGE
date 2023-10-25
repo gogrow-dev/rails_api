@@ -1,0 +1,11 @@
+Description:
+    Generates files necessary by heroku
+
+Example:
+    bin/rails generate heroku --app-name=rails-api
+
+    This will create:
+        Procfile
+        app.json
+        Aptfile
+        release.sh

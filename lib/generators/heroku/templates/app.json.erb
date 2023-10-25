@@ -1,6 +1,5 @@
 {
-  "name": "rails-api",
-  "description": "A minimal ruby on rails api",
+  <%= "\"name\": \"#{@app_name}\"," if @app_name %>
   "addons": [
     {
       "as": "Redis",
@@ -29,7 +28,7 @@
       "size": "Basic"
     },
     "worker": {
-      "quantity": 0,
+      "quantity": 1,
       "size": "Basic"
     }
   }
