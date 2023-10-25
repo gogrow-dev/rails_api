@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '2e7d1fbb8f8925389fbe13bd4d8a87dad5081f3d7dabf343374fea2b0902957935103f6e6450da0ac69b5a13dbb042'
+  # config.secret_key = 'e3d2e59a3f3c5345034b28559a6328360f2967ec729bd021b27b773ba04001a1409fc3c4c416f3db327616fdbeb872b05b1d00371a801e2896101ad464030c9b'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -97,7 +97,10 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = %i[http_auth token_auth]
+
+  # Added params_auth so that admin panels which use devise can still use session
+  # to store the user session
+  config.skip_session_storage = %i[http_auth params_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -126,7 +129,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'ea82393e9d2ce239e43fb84a1ac46f0fee68ca2de70b94b4992e3a635ff5972e99bd73bb85cd9d981abec724bbb6ed9909'
+  # config.pepper = 'fc8f59650e40508878e8db8338e9aa16402d7de4aec365994722a7ef60913502af2174df6b397834301b6fb59983cbe8e0c7076575ca012450d7e298bb3ff9ef'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -308,4 +311,10 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  # Devise jwt config
+
+  config.jwt do |jwt|
+    jwt.secret = ENV.fetch('JWT_SECRET', nil)
+  end
 end

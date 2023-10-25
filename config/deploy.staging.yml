@@ -1,0 +1,94 @@
+# Name of your application. Used to uniquely configure containers.
+service: rails-api
+
+# Name of the container image.
+image: rails-api
+
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - 127.0.0.1
+    labels:
+      traefik.http.routers.gbg_api.rule: Host(`api.rails-api-staging-staging.com`)
+      traefik.http.routers.gbg_api_secure.entrypoints: websecure
+      traefik.http.routers.gbg_api_secure.rule: Host(`api.rails-api-staging.com`)
+      traefik.http.routers.gbg_api_secure.tls: true
+      traefik.http.routers.gbg_api_secure.tls.certresolver: letsencrypt
+  job:
+    hosts:
+      - 127.0.0.1
+    cmd: bin/sidekiq
+
+# Credentials for your image host.
+registry:
+  server: <%= ENV['AWS_ACCOUNT_ID'] %>.dkr.ecr.<%= ENV['AWS_REGION'] %>.amazonaws.com
+  username: AWS
+  password: <%= %x(aws ecr get-login-password) %>
+
+env:
+  clear:
+    RAILS_ENV: staging
+  secret:
+    - SERVER_HOST
+    - JWT_SECRET
+    - FRONTEND_URL
+    - MAILER_SENDER
+    - DATABASE_URL
+    - REDIS_URL
+    - S3_ACCESS_KEY_ID
+    - S3_ACCESS_KEY
+    - S3_REGION
+    - S3_BUCKET
+    - SIDEKIQ_PASSWORD
+    - SIDEKIQ_REDIS_URL
+
+# Use a different ssh user than root
+ssh:
+  user: ubuntu
+
+# Configure builder setup.
+builder:
+  args:
+    RUBY_VERSION: 3.2.2
+    RAILS_ENV: staging
+  multiarch: true
+  # remote:
+  #   arch: amd64
+  #   host: ssh://ubuntu@34.233.47.38
+
+# Configure custom arguments for Traefik logging to CloudWatch.
+# logging:
+#   driver: awslogs
+#   options:
+#     awslogs-region: <%= ENV['AWS_REGION'] %>
+#     awslogs-group: production/api
+#     awslogs-create-group: true
+#     tag: "{{.Name}}-{{.ID}}"
+
+# Configure custom arguments for Traefik logging.
+traefik:
+  args:
+    log: true
+    log.level: ERROR
+    accesslog: true
+    accesslog.format: json
+    accesslog.filters.minduration: 10ms
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entrypoint.permanent: true
+    certificatesResolvers.letsencrypt.acme.email: "dev@rails-api-staging.com"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+  options:
+    publish:
+      - "443:443"
+    volume:
+      - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+
+# Configure a custom healthcheck (default is /up on port 3000)
+healthcheck:
+  path: /healthcheck

@@ -27,19 +27,16 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-# Ignore database setup file
-config/database.yml
 
-.byebug_history
+# Ignore simplecov generated files
+/coverage
 
+# ignore envs
 .env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
-
-# redis db dump
-dump.rdb
-
-# ignore compiled assets
-/public/assets
+.env.*
+# allow .env.sample to be commited
+!.env.sample
+# allow .env.test file to be commited.
+!.env.test
+# allow .env.erb templates used by kamal to run kamal envify -d environment
+!.env*.erb

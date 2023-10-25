@@ -8,12 +8,6 @@ require 'active_support/core_ext/integer/time'
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
-  config.after_initialize do
-    Bullet.enable        = true
-    Bullet.bullet_logger = true
-    Bullet.raise         = true
-  end
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.
@@ -38,8 +32,11 @@ Rails.application.configure do
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
 
-  # Enable request forgery protection in test environment.
-  config.action_controller.allow_forgery_protection = true
+  # Add default url options for mailer
+  config.action_mailer.default_url_options = { host: ENV.fetch('SERVER_HOST', 'localhost'), port: 3000 }
+
+  # Disable request forgery protection in test environment.
+  config.action_controller.allow_forgery_protection = false
 
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
@@ -50,7 +47,6 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

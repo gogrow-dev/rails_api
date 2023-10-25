@@ -1,26 +1,59 @@
-require:
-  - rubocop-rails
-  - rubocop-rspec
+require: rubocop-rails
+
+inherit_from: .rubocop.todo.yml
 
 AllCops:
-  NewCops: disable
+  NewCops: enable
+  SuggestExtensions: false
 
-Style/Documentation:
-  Enabled: false
+Layout/LineLength:
+  Max: 160
+  AllowedPatterns:
+    - "^ *#"
+    - '\A#'
+  Exclude:
+    - db/migrate/*
 
 Metrics/AbcSize:
+  Max: 19
   Exclude:
     - db/migrate/*
 
 Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Max: 10
   Exclude:
-    - config/environments/*
-    - db/migrate/*
     - spec/**/*
+    - db/migrate/*
 
 Metrics/MethodLength:
+  Max: 40
   Exclude:
     - db/migrate/*
 
-RSpec/MultipleExpectations:
+Metrics/ModuleLength:
+  Max: 200
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - db/migrate/*
+
+Rails/NotNullColumn:
+  Exclude:
+    - db/migrate/20230122231501_add_jti_matcher_to_users.rb
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - staging
+    - production
+    - review
+
+Style/Documentation:
   Enabled: false
