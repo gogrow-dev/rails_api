@@ -42,6 +42,7 @@ env:
     - S3_BUCKET
     - SIDEKIQ_PASSWORD
     - SIDEKIQ_REDIS_URL
+    - SECRET_KEY_BASE
 
 # Use a different ssh user than root
 ssh:
