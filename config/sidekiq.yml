@@ -1,8 +1,8 @@
----
-:verbose: false
 :concurrency: 5
-:pidfile: .tmp/pids/sidekiq.pid
-:logfile: .log/sidekiq.log
+development:
+  :concurrency: 5
+production:
+  :concurrency: 5
 :queues:
+  - mailers
   - default
-  - mailer

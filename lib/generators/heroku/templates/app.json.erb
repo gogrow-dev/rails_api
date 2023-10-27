@@ -1,0 +1,35 @@
+{
+  <%= "\"name\": \"#{@app_name}\"," if @app_name %>
+  "addons": [
+    {
+      "as": "Redis",
+      "plan": "heroku-redis:mini"
+    },
+    {
+      "as": "Postgres",
+      "plan": "heroku-postgresql:mini"
+    },
+    {
+      "as": "Papertrail",
+      "plan": "papertrail:choklad"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku-community/apt.tgz"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-ruby.git"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "Basic"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "Basic"
+    }
+  }
+}

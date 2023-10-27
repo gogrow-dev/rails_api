@@ -5,13 +5,12 @@ require 'active_support/core_ext/integer/time'
 Rails.application.configure do
   config.after_initialize do
     Bullet.enable        = true
-    Bullet.alert         = true
-    Bullet.bullet_logger = true
-    Bullet.console       = true
-    Bullet.rails_logger  = true
-    Bullet.add_footer    = true
-  end
 
+    Bullet.console       = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger  = true
+    Bullet.raise         = false
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -31,7 +30,7 @@ Rails.application.configure do
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp/caching-dev.txt').exist?
-    config.cache_store = :redis_cache_store
+    config.cache_store = :memory_store
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
@@ -40,9 +39,6 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
-
-  # Enable request forgery protection in test environment.
-  config.action_controller.allow_forgery_protection = true
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
@@ -56,10 +52,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
 
+  config.action_mailer.default_url_options = { host: ENV.fetch('SERVER_HOST', 'localhost'), port: 3000 }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
-
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise

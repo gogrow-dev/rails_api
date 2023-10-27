@@ -1,8 +1,0 @@
-test:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  username: <%= ENV['PGUSER'] %>
-  password: <%= ENV['PGPASSWORD'] %>
-  host: <%= ENV['PGHOST'] %>
-  database: <%= ENV['POSTGRES_DB'] %>
