@@ -10,7 +10,7 @@ servers:
     hosts:
       - 127.0.0.1
     labels:
-      traefik.http.routers.gbg_api.rule: Host(`api.rails-api-staging-staging.com`)
+      traefik.http.routers.gbg_api.rule: Host(`api.rails-api-staging.com`)
       traefik.http.routers.gbg_api_secure.entrypoints: websecure
       traefik.http.routers.gbg_api_secure.rule: Host(`api.rails-api-staging.com`)
       traefik.http.routers.gbg_api_secure.tls: true
