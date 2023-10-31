@@ -228,6 +228,7 @@ Head over to repository -> actions -> secrets and add the following secrets:
 - `AWS_ACCESS_KEY_ID` (the aws access key id to connect to your staging server)
 - `AWS_SECRET_ACCESS_KEY` (the aws secret access key to connect to your staging server)
 - `AWS_REGION` (the aws region to connect to your staging server)
+- `AWS_ACCOUNT_ID` (the aws account id where the ECR docker image is hosted)
 
 ### Production secrets
 
@@ -237,6 +238,7 @@ Head over to repository -> actions -> secrets and add the following secrets:
 - `AWS_ACCESS_KEY_ID` (the aws access key id to connect to your production server)
 - `AWS_SECRET_ACCESS_KEY` (the aws secret access key to connect to your production server)
 - `AWS_REGION` (the aws region to connect to your production server)
+- `AWS_ACCOUNT_ID` (the aws account id where the ECR docker image is hosted)
 
 ### Notes
 
