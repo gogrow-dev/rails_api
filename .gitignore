@@ -40,3 +40,6 @@
 !.env.test
 # allow .env.erb templates used by kamal to run kamal envify -d environment
 !.env*.erb
+
+# Ignore all .pem files
+*.pem
