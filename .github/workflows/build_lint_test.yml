@@ -31,7 +31,7 @@ jobs:
         options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby
+      - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
 
@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby
+      - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
       - name: Install libvips
@@ -89,7 +89,7 @@ jobs:
         options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby
+      - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
 
