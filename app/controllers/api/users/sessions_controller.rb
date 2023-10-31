@@ -18,7 +18,7 @@ module Api
       end
 
       def log_out_success
-        render status: :no_content
+        head :no_content
       end
 
       def log_out_failure
