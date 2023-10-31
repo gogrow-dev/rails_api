@@ -4,12 +4,15 @@
 ARG RUBY_VERSION=3.2.2
 FROM ruby:$RUBY_VERSION-slim as base
 
+ARG RAILS_ENV=production
+
 # Rails app lives here
 WORKDIR /rails
 
 # Set production environment
 ENV BUNDLE_WITHOUT="development:test" \
-    BUNDLE_DEPLOYMENT="1"
+    BUNDLE_DEPLOYMENT="1" \
+    RAILS_ENV=$RAILS_ENV
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
