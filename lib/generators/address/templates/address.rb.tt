@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+class Address < ApplicationRecord
+  belongs_to :addressable, polymorphic: true
+
+  normalizes :line1, :line2, :city, :state, :country, with: ->(value) { value.strip.gsub(/\s\s+/, ' ') }
+
+  validates :line1, :city, :state, :country, :zip_code, presence: true
+  validates :zip_code, format: { with: /\A\d{5}(-\d{4})?\z/, message: 'should be in the form 12345 or 12345-1234' }
+end

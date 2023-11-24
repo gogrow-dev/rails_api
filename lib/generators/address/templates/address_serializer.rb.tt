@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+class AddressSerializer < ApplicationSerializer
+  identifier :id
+
+  fields :line1, :line2, :city, :state, :country, :zip_code, :created_at, :updated_at
+end
