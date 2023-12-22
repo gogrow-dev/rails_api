@@ -20,7 +20,7 @@
 # GET /users?name[]=John&name[]=Pedro&name.rel=in
 # GET /users?age=18&age.rel=>
 # GET /users?age[]=18&age[]=21&age.rel=between
-# GET /users?posts.created_at[]=2020-01-01&posts.rel=>=
+# GET /users?posts.created_at=2020-01-01&posts.rel=>=
 module Filterable
   extend ActiveSupport::Concern
 

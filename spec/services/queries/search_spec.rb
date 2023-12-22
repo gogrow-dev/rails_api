@@ -37,7 +37,7 @@ RSpec.describe Queries::Search do
     context 'when the scope does not respond to the model search scope' do
       it 'raises an ArgumentError' do
         expect { search }.to raise_error(ArgumentError).with_message(
-          "User does not respond to #{model_search_scope}"
+          "#{scope.klass} does not respond to #{model_search_scope}"
         )
       end
     end

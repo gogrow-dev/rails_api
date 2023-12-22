@@ -19,16 +19,27 @@ RSpec.describe Queries::Filter do
     context 'when filter_conditions is not empty' do
       let(:filter_conditions) { [{ relation:, field: 'id', value: }] }
 
-      %w[= !=].each do |relation|
-        context "when relation is #{relation}" do
-          let(:value) { 1 }
-          let(:relation) { relation }
+      context 'when relation is =' do
+        let(:value) { 1 }
+        let(:relation) { '=' }
 
-          it 'filters the scope by the given filter conditions' do
-            expect(scope).to receive(:where).with('id' => 1)
+        it 'filters the scope by the given filter conditions' do
+          expect(scope).to receive(:where).with('id' => 1)
 
-            filter
-          end
+          filter
+        end
+      end
+
+      context 'when relation is !=' do
+        let(:value) { 1 }
+        let(:relation) { '!=' }
+
+        before { allow(scope).to receive_message_chain(:where, :not) }
+
+        it 'filters the scope by the given filter conditions' do
+          expect(scope).to receive_message_chain(:where, :not).with('id' => 1)
+
+          filter
         end
       end
 

@@ -33,8 +33,10 @@ module Queries
 
     def filtered_scope(scope, relation, field, value)
       case relation
-      when '=', '!=', 'in'
+      when '=', 'in'
         scope.where(field => value)
+      when '!='
+        scope.where.not(field => value)
       when 'between'
         scope.where("#{field} BETWEEN ? AND ?", value.first, value.last)
       when 'starts_with'
