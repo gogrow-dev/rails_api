@@ -47,6 +47,10 @@ Rails/NotNullColumn:
   Exclude:
     - db/migrate/20230122231501_add_jti_matcher_to_users.rb
 
+Rails/Output:
+  Exclude:
+    - lib/generators/**/*.rb
+
 Rails/UnknownEnv:
   Environments:
     - development

@@ -1,0 +1,12 @@
+Description:
+    This generator creates a model, serializer, migration, factory, and spec for the Address model.
+
+Example:
+    bin/rails generate address
+
+    This will create:
+        app/models/address.rb
+        app/serializers/address_serializer.rb
+        db/migrate/20230101000000_create_addresses.rb
+        spec/factories/addresses.rb
+        spec/models/address_spec.rb
