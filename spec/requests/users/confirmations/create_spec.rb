@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'POST /api/users/confirmations', type: :request do
+RSpec.describe 'POST /api/v1/users/confirmations', type: :request do
   let(:user) { create(:user, :unconfirmed) }
   let(:email) { user.email }
   let(:params) do

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'POST /api/users', type: :request do
+RSpec.describe 'POST /api/v1/users', type: :request do
   let(:user) { build(:user) }
   let(:email) { user.email }
   let(:password) { user.password }
