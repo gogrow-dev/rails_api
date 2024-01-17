@@ -25,15 +25,9 @@ jobs:
       - name: Setup SSH key
         uses: webfactory/ssh-agent@v0.7.0
         with:
-          ssh-private-key: ${{ env.SSH_PRODUCTION_PRIVATE_KEY }}
-
-      - name: Setup remote builder SSH key
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ env.DOCKER_REMOTE_BUILDER_IP }} >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-          echo "${{ env.DOCKER_REMOTE_BUILDER_PRIVATE_KEY }}" >> ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          ssh-private-key: |
+            ${{ env.SSH_PRODUCTION_PRIVATE_KEY }}
+            ${{ env.DOCKER_REMOTE_BUILDER_PRIVATE_KEY }}
 
       - name: Install docker buildx
         uses: docker/setup-buildx-action@v2
@@ -58,6 +52,7 @@ jobs:
 
       - name: Run Kamal deploy targeting production
         env:
+          KAMAL_ENV: ${{ env.RAILS_ENV }}
           RAILS_ENV: ${{ env.RAILS_ENV }}
           AWS_ACCOUNT_ID: ${{ env.AWS_ACCOUNT_ID }}
           DOCKER_BUILDKIT: 1
