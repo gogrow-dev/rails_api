@@ -92,4 +92,4 @@ traefik:
 
 # Configure a custom healthcheck (default is /up on port 3000)
 healthcheck:
-  path: /healthcheck
+  path: /up

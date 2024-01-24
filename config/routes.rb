@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get '/healthcheck', to: ->(_env) { [200, {}, ['OK']] }
+  get 'up' => 'rails/health#show', as: :rails_health_check
 
   defaults format: :html do
     mount Sidekiq::Web => '/sidekiq'
