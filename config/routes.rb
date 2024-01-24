@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   defaults format: :html do
     mount Sidekiq::Web => '/sidekiq'
 
-    # Uncomment for admin panel
+    # Uncomment when using AdminUser devise model for authenticated admin panels
     # devise_for :admin_users, only: %i[sessions password], controllers: {
     #   sessions: 'admin_users/sessions',
     #   passwords: 'admin_users/passwords'
