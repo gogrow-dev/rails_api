@@ -4,20 +4,15 @@ require 'rails_helper'
 
 RSpec.describe Queries::Paginate do
   let(:scope) { double('scope') }
-  let(:metadata) do
-    double('metadata',
-           page: 1,
-           pages: 1,
-           count: 10,
-           next: nil,
-           prev: nil)
-  end
-
-  before do
-    allow_any_instance_of(Pagy::ArelExtra).to receive(:pagy_arel).and_return([metadata, scope])
-  end
 
   describe '#call' do
+    before do
+      allow(scope).to receive(:limit).with(anything).and_return(scope)
+      allow(scope).to receive(:offset).with(anything).and_return(scope)
+      allow(scope).to receive(:count).with(anything).and_return(10)
+      allow(scope).to receive(:group_values).and_return([])
+    end
+
     subject(:paginate) { described_class.call(scope, page:, per_page:) }
 
     context 'when page is not present' do
@@ -27,9 +22,12 @@ RSpec.describe Queries::Paginate do
         let(:per_page) { nil }
 
         it 'paginates the scope with default page and per_page' do
-          expect_any_instance_of(Pagy::ArelExtra).to receive(:pagy_arel).with(scope, items: 10, page: 1)
+          expect(scope).to receive(:limit).with(10)
+          expect(scope).to receive(:offset).with(0)
+          expect(scope).to receive(:count).with(:all).and_return(10)
 
-          paginate
+          expect(paginate[0]).to include(page: 1, total_pages: 1, total_count: 10, next_page: nil, prev_page: nil, per_page: 10)
+          expect(paginate[1]).to eq(scope)
         end
       end
 
@@ -37,9 +35,11 @@ RSpec.describe Queries::Paginate do
         let(:per_page) { 20 }
 
         it 'paginates the scope with the given per_page' do
-          expect_any_instance_of(Pagy::ArelExtra).to receive(:pagy_arel).with(scope, items: per_page, page: 1)
-
-          paginate
+          expect(scope).to receive(:limit).with(20)
+          expect(scope).to receive(:offset).with(0)
+          expect(scope).to receive(:count).with(:all).and_return(10)
+          expect(paginate[0]).to include(page: 1, total_pages: 1, total_count: 10, next_page: nil, prev_page: nil, per_page:)
+          expect(paginate[1]).to eq(scope)
         end
       end
 
@@ -47,9 +47,11 @@ RSpec.describe Queries::Paginate do
         let(:per_page) { 200 }
 
         it 'paginates the scope with the given per_page' do
-          expect_any_instance_of(Pagy::ArelExtra).to receive(:pagy_arel).with(scope, items: 100, page: 1)
-
-          paginate
+          expect(scope).to receive(:limit).with(100)
+          expect(scope).to receive(:offset).with(0)
+          expect(scope).to receive(:count).with(:all).and_return(10)
+          expect(paginate[0]).to include(page: 1, total_pages: 1, total_count: 10, next_page: nil, prev_page: nil, per_page: 100)
+          expect(paginate[1]).to eq(scope)
         end
       end
     end
@@ -61,9 +63,11 @@ RSpec.describe Queries::Paginate do
         let(:per_page) { nil }
 
         it 'paginates the scope with default per_page' do
-          expect_any_instance_of(Pagy::ArelExtra).to receive(:pagy_arel).with(scope, items: 10, page:)
-
-          paginate
+          expect(scope).to receive(:limit).with(10)
+          expect(scope).to receive(:offset).with(10)
+          expect(scope).to receive(:count).with(:all).and_return(10)
+          expect(paginate[0]).to include(page:, total_pages: 1, total_count: 10, next_page: nil, prev_page: 1, per_page: 10)
+          expect(paginate[1]).to eq(scope)
         end
       end
 
@@ -71,9 +75,11 @@ RSpec.describe Queries::Paginate do
         let(:per_page) { 20 }
 
         it 'paginates the scope with the given per_page' do
-          expect_any_instance_of(Pagy::ArelExtra).to receive(:pagy_arel).with(scope, items: per_page, page:)
-
-          paginate
+          expect(scope).to receive(:limit).with(20)
+          expect(scope).to receive(:offset).with(20)
+          expect(scope).to receive(:count).with(:all).and_return(10)
+          expect(paginate[0]).to include(page:, total_pages: 1, total_count: 10, next_page: nil, prev_page: 1, per_page: 20)
+          expect(paginate[1]).to eq(scope)
         end
       end
     end
