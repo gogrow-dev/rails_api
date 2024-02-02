@@ -12,7 +12,6 @@ gem 'blueprinter', '~> 0.30.0'
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.9', '>= 4.9.3'
 gem 'devise-jwt', '~> 0.11.0'
-gem 'pagy', '~> 6.1'
 gem 'pg', '~> 1.5', '>= 1.5.4'
 gem 'puma', '~> 6.4'
 gem 'rack-cors', '~> 2.0', '>= 2.0.1'
