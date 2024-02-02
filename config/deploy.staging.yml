@@ -53,7 +53,11 @@ builder:
   args:
     RUBY_VERSION: 3.2.2
     RAILS_ENV: staging
-  multiarch: true
+  multiarch: false
+  local:
+    arch: amd64
+  cache:
+    type: gha
   # remote:
   #   arch: amd64
   #   host: ssh://ubuntu@34.233.47.38

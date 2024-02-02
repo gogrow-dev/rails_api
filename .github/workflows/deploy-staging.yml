@@ -2,8 +2,6 @@ name: Deploy to staging
 
 env:
   RAILS_ENV: staging
-  DOCKER_REMOTE_BUILDER_IP: ${{ secrets.DOCKER_REMOTE_BUILDER_IP }}
-  DOCKER_REMOTE_BUILDER_PRIVATE_KEY: ${{ secrets.DOCKER_REMOTE_BUILDER_PRIVATE_KEY }}
   SSH_STAGING_PRIVATE_KEY: ${{ secrets.SSH_STAGING_PRIVATE_KEY }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -25,15 +23,8 @@ jobs:
       - name: Setup SSH key
         uses: webfactory/ssh-agent@v0.7.0
         with:
-          ssh-private-key: ${{ env.SSH_STAGING_PRIVATE_KEY }}
-
-      - name: Setup remote builder SSH key
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ env.DOCKER_REMOTE_BUILDER_IP }} >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-          echo "${{ env.DOCKER_REMOTE_BUILDER_PRIVATE_KEY }}" >> ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          ssh-private-key: |
+            ${{ env.SSH_STAGING_PRIVATE_KEY }}
 
       - name: Install docker buildx
         uses: docker/setup-buildx-action@v2
