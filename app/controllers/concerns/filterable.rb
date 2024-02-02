@@ -33,9 +33,10 @@ module Filterable
 
   class_methods do
     # @param keys [Array<Symbol,String,Hash>]
+    # @param mapped_keys [Hash<Symbol,String>]
     def filterable_by(*keys, **mapped_keys)
       self.filter_fields = keys
-      self.mapped_filter_fields = mapped_keys
+      self.mapped_filter_fields = mapped_keys.to_a
     end
   end
 
@@ -45,18 +46,15 @@ module Filterable
   # @param filter_conditions[:value] [String,Integer,Array<String,Integer>]
   # @param filter_conditions[:relation] [String]
   # @return [ActiveRecord::Relation]
-  def filter(scope, filter_conditions: filter_conditions(*filter_fields, **mapped_filter_fields))
+  def filter(scope, filter_conditions: filter_conditions(*filter_fields, *mapped_filter_fields))
     Queries::Filter.call(scope, filter_conditions:)
   end
 
   # @param fields [Array<Symbol,String>]
   # @param mapped_fields [Array<Hash<Symbol,String>>]
   # @return [Array<Hash>]
-  def filter_conditions(*fields, **mapped_fields)
-    simple_filters = fields.presence || filter_fields
-    mapped_filters = mapped_fields.to_a.presence || mapped_filter_fields
-
-    (simple_filters + mapped_filters).filter_map do |filter_opt|
+  def filter_conditions(*fields)
+    fields.filter_map do |filter_opt|
       field = filter_name(filter_opt)
 
       next if filter_value(filter_opt).blank? && %w[is_null is_not_null].exclude?(filter_rel_value(filter_opt))
@@ -64,7 +62,7 @@ module Filterable
       {
         field:,
         value: filter_value(filter_opt),
-        relation: filter_rel_value(filter_opt) || (filter_value(filter_opt).is_a?(Array) ? 'in' : '=')
+        relation: filter_rel_value(filter_opt).presence || (filter_value(filter_opt).is_a?(Array) ? 'in' : '=')
       }
     end
   end
