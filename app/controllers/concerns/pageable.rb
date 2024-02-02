@@ -7,7 +7,7 @@
 #
 #   def index
 #     scope = paginate(User.all)
-#     render json: scope
+#     render json: scope, root: :users, meta: page_info
 #   end
 # end
 #
@@ -15,12 +15,17 @@
 # GET /users?page=1&per_page=10
 # GET /users?page=2&per_page=50
 module Pageable
+  extend ActiveSupport::Concern
+
+  included { attr_reader :page_info }
+
   # @param scope [ActiveRecord::Relation]
   # @param page [Integer,String,nil]
   # @param per_page [Integer,String,nil]
   # @return [ActiveRecord::Relation]
   def paginate(scope)
-    Queries::Paginate.call(scope, page:, per_page:)
+    paginated_scope, @page_info = Queries::Paginate.call(scope, page:, per_page:)
+    paginated_scope
   end
 
   # @return [String,nil]

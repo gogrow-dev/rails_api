@@ -27,7 +27,7 @@ module Searchable
 
   # @return [String]
   def search_term
-    params[search_param].strip
+    params[search_param]&.strip
   end
 
   def search_param
