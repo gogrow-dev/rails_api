@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'DELETE /api/users/sign_out', type: :request do
+RSpec.describe 'DELETE /api/v1/users/sign_out', type: :request do
   let(:user) { create(:user) }
   let(:headers) do
     {
@@ -10,7 +10,7 @@ RSpec.describe 'DELETE /api/users/sign_out', type: :request do
     }
   end
 
-  subject { delete destroy_user_session_path, headers: }
+  subject { delete destroy_user_session_path, headers:, as: :json }
 
   context 'when the user is signed in' do
     it 'returns a successful response' do

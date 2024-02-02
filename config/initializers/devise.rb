@@ -98,9 +98,11 @@ Devise.setup do |config|
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
 
-  # Added params_auth so that admin panels which use devise can still use session
-  # to store the user session
-  config.skip_session_storage = %i[http_auth params_auth]
+  # because there's a devise-jwt for the User model, and a devise can be mounted
+  # for an AdminUser model, we need to set this to false, otherwise the AdminUser
+  # model won't be stored in the session and it will cause problems when trying to
+  # sign in as an AdminUser
+  config.skip_session_storage = [:http_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX

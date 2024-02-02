@@ -38,10 +38,10 @@ module RailsApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    # needed for sidekiq web interface and some admin panels
-    config.session_store :cookie_store, key: '_interslice_session'
+    # reenable cookies and sessions for web interfaces (sidekiq web and admin portals)
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use config.session_store, config.session_options
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
 
     config.require_master_key = false
     config.read_encrypted_secrets = false

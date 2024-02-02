@@ -104,7 +104,7 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet (7.1.2)
+    bullet (7.1.6)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     concurrent-ruby (1.2.3)
@@ -346,7 +346,7 @@ DEPENDENCIES
   aws-sdk-s3 (~> 1.122)
   blueprinter (~> 0.30.0)
   bootsnap
-  bullet (~> 7.1, >= 7.1.2)
+  bullet (~> 7.1, >= 7.1.6)
   debug (~> 1.8)
   devise (~> 4.9, >= 4.9.3)
   devise-jwt (~> 0.11.0)
