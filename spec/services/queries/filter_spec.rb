@@ -110,6 +110,28 @@ RSpec.describe Queries::Filter do
           filter
         end
       end
+
+      context 'when relation is is_null' do
+        let(:relation) { 'is_null' }
+        let(:value) { nil }
+
+        it 'filters the scope by the given filter conditions' do
+          expect(scope).to receive(:where).with('id' => nil)
+
+          filter
+        end
+      end
+
+      context 'when relation is is_not_null' do
+        let(:relation) { 'is_not_null' }
+        let(:value) { nil }
+
+        it 'filters the scope by the given filter conditions' do
+          expect(scope).to receive_message_chain(:where, :not).with('id' => nil)
+
+          filter
+        end
+      end
     end
 
     context 'when filter_conditions contains multiple conditions' do
