@@ -2,7 +2,7 @@
 
 module Queries
   class Filter < ApplicationService
-    RELATIONS = %w[= != > >= < <= between in starts_with ends_with contains].freeze
+    RELATIONS = %w[= != > >= < <= between in starts_with ends_with contains is_null is_not_null].freeze
 
     def initialize(scope, filter_conditions:)
       super()
@@ -45,6 +45,10 @@ module Queries
         scope.where("#{field} LIKE ?", "%#{value}")
       when 'contains'
         scope.where("#{field} LIKE ?", "%#{value}%")
+      when 'is_null'
+        scope.where(field => nil)
+      when 'is_not_null'
+        scope.where.not(field => nil)
       else # '>', '>=', '<', '<='
         scope.where("#{field} #{relation} ?", value)
       end
