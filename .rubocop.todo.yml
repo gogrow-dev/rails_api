@@ -1,0 +1,3 @@
+Style/OptionalArguments:
+  Exclude:
+    - 'app/mailers/components/**/*.rb'

@@ -1,0 +1,7 @@
+<%= render Components::Heading.new("Welcome #{@email}", level: 3) %>
+<%= render Components::Text.new do %>
+  You can confirm your account email through the link below
+<% end %>
+<%= render Components::Align.new(:center) do %>
+  <%= render Components::Button.new('Confirm my account', confirmation_url(@resource, confirmation_token: @token), size: :lg)%>
+<% end %>
