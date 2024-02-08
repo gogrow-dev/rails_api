@@ -240,10 +240,6 @@ Head over to repository -> actions -> secrets and add the following secrets:
 - `AWS_REGION` (the aws region to connect to your production server)
 - `AWS_ACCOUNT_ID` (the aws account id where the ECR docker image is hosted)
 
-### Notes
-
-The Github Action to deploy with kamal is flaky, if you see an error that SSH was blocked, try re-running the workflow a couple of times until it passes.
-
 ## CD to Heroku
 
 Go to Heroku and setup the app to auto-deploy from the `main` branch, and make sure to enable the option `Wait for CI to pass before deploy`.
