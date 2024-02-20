@@ -9,7 +9,7 @@ AllCops:
 Layout/LineLength:
   Max: 160
   AllowedPatterns:
-    - "^ *#"
+    - '^ *#'
     - '\A#'
   Exclude:
     - db/migrate/*
@@ -50,6 +50,9 @@ Rails/NotNullColumn:
 Rails/Output:
   Exclude:
     - lib/generators/**/*.rb
+
+Rails/ScopeArgs:
+  Enabled: false
 
 Rails/UnknownEnv:
   Environments:
