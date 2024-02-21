@@ -29,6 +29,7 @@ registry:
 env:
   clear:
     RAILS_ENV: staging
+    SERVER_TIMING: true
   secret:
     - SERVER_HOST
     - JWT_SECRET
