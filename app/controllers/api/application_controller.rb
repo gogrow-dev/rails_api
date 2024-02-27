@@ -2,6 +2,12 @@
 
 module Api
   class ApplicationController < ActionController::API
+    # Uncomment the following lines to enable the Warped controllers concerns
+    # include Warped::Controllers::Filterable
+    # include Warped::Controllers::Searchable
+    # include Warped::Controllers::Sortable
+    # include Warped::Controllers::Pageable
+
     before_action :authenticate_user!
 
     rescue_from ActiveRecord::RecordNotFound,        with: :render_not_found
