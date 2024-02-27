@@ -19,6 +19,7 @@ gem 'redis', '~> 5.0', '>= 5.0.8'
 gem 'ruby-vips', '~> 2.2'
 gem 'sidekiq', '~> 7.1', '>= 7.1.6'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'warped', '~> 0.1.0'
 
 group :development, :test do
   gem 'bullet', '~> 7.1', '>= 7.1.6'

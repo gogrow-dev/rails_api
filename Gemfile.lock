@@ -328,6 +328,9 @@ GEM
       dry-configurable (>= 0.13, < 2)
       jwt (~> 2.1)
       warden (~> 1.2)
+    warped (0.1.0)
+      rails (>= 6.0, < 8.0)
+      zeitwerk (>= 2.4)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -367,6 +370,7 @@ DEPENDENCIES
   sidekiq (~> 7.1, >= 7.1.6)
   simplecov (~> 0.22.0)
   tzinfo-data
+  warped (~> 0.1.0)
 
 RUBY VERSION
    ruby 3.2.2p53
