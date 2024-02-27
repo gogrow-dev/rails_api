@@ -17,7 +17,7 @@ Sidekiq.configure_server do |config|
   }
 end
 
-unless Rails.env.development? || Rails.env.test?
+unless Rails.env.local?
   sidekiq_password = ENV.fetch('SIDEKIQ_PASSWORD', SecureRandom.hex(12))
 
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
