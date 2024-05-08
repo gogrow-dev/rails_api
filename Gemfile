@@ -12,6 +12,7 @@ gem 'blueprinter', '~> 1.0', '>= 1.0.2'
 gem 'bootsnap', '~> 1.18', '>= 1.18.3', require: false
 gem 'devise', '~> 4.9', '>= 4.9.3'
 gem 'devise-jwt', '~> 0.11.0'
+gem 'dry-initializer', '~> 3.1', '>= 3.1.1'
 gem 'pg', '~> 1.5', '>= 1.5.5'
 gem 'puma', '~> 6.4', '>= 6.4.2'
 gem 'rack-cors', '~> 2.0', '>= 2.0.1'
@@ -19,7 +20,7 @@ gem 'redis', '~> 5.1'
 gem 'ruby-vips', '~> 2.2', '>= 2.2.1'
 gem 'sidekiq', '~> 7.2', '>= 7.2.2'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'warped', '~> 0.1.0'
+gem 'warped', '~> 0.2.0'
 
 group :development, :test do
   gem 'bullet', '~> 7.1', '>= 7.1.6'
