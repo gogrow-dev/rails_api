@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.3.0
+ARG RUBY_VERSION=3.3.3
 FROM ruby:$RUBY_VERSION-slim as base
 
 ARG RAILS_ENV=production
@@ -10,8 +10,9 @@ ARG RAILS_ENV=production
 WORKDIR /rails
 
 # Set production environment
-ENV BUNDLE_WITHOUT="development:test" \
-    BUNDLE_DEPLOYMENT="1" \
+ENV BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development:test" \
     RAILS_ENV=$RAILS_ENV
 
 # Update gems and bundler
@@ -30,6 +31,7 @@ RUN --mount=type=cache,id=dev-apt-cache,sharing=locked,target=/var/cache/apt \
 
 # Install application gems
 COPY --link Gemfile Gemfile.lock .ruby-version ./
+RUN sed -i "/net-pop (0.1.2)/a\      net-protocol" Gemfile.lock
 RUN --mount=type=cache,id=bld-gem-cache,sharing=locked,target=/srv/vendor \
     bundle config set app_config .bundle && \
     bundle config set path /srv/vendor && \
@@ -57,13 +59,14 @@ RUN --mount=type=cache,id=dev-apt-cache,sharing=locked,target=/var/cache/apt \
     apt-get install --no-install-recommends -y curl libvips postgresql-client
 
 # Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
-USER rails:rails
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R 1000:1000 db log storage tmp
+USER 1000:1000
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
