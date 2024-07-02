@@ -35,7 +35,7 @@ end
 
 group :development do
   gem 'annotate', '~> 3.2'
-  gem 'dockerfile-rails', '~> 1.6', '>= 1.6.5'
+  gem 'dockerfile-rails', '~> 1.6', '>= 1.6.17'
   gem 'letter_opener', '~> 1.10'
 end
 
