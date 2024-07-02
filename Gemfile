@@ -18,7 +18,7 @@ gem 'puma', '~> 6.4', '>= 6.4.2'
 gem 'rack-cors', '~> 2.0', '>= 2.0.2'
 gem 'redis', '~> 5.2'
 gem 'ruby-vips', '~> 2.2', '>= 2.2.1'
-gem 'sidekiq', '~> 7.2', '>= 7.2.2'
+gem 'sidekiq', '~> 7.3'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'warped', '~> 1.0.0'
 
