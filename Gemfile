@@ -28,7 +28,7 @@ group :development, :test do
   gem 'dotenv-rails', '~> 3.1'
   gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
   gem 'faker', '~> 3.2', '>= 3.2.3'
-  gem 'rspec-rails', '~> 6.1', '>= 6.1.1'
+  gem 'rspec-rails', '~> 6.1', '>= 6.1.3'
   gem 'rubocop', '~> 1.60', '>= 1.60.2', require: false
   gem 'rubocop-rails', '~> 2.23', '>= 2.23.1', require: false
 end
