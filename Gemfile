@@ -10,7 +10,7 @@ gem 'rails', '~> 7.1', '>= 7.1.3.4'
 gem 'aws-sdk-s3', '~> 1.122'
 gem 'blueprinter', '~> 1.0', '>= 1.0.2'
 gem 'bootsnap', '~> 1.18', '>= 1.18.3', require: false
-gem 'devise', '~> 4.9', '>= 4.9.3'
+gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'devise-jwt', '~> 0.11.0'
 gem 'dry-initializer', '~> 3.1', '>= 3.1.1'
 gem 'pg', '~> 1.5', '>= 1.5.5'
