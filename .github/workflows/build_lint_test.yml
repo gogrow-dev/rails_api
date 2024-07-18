@@ -1,5 +1,4 @@
 # Runs zeitwerk:check, rubocop and rspec on push.
-# The CI has 3 jobs, build, lint and test.
 
 name: build, lint and test
 
@@ -30,28 +29,21 @@ jobs:
           - 6379:6379
         options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Patch for ruby 3.3.3
-        run: |
-          sed -i "/net-pop (0.1.2)/a\      net-protocol" Gemfile.lock
-
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby
         with:
           bundler-cache: true
-
       - name: Install libvips
         run: |
           sudo apt-get update
           sudo apt-get install -y libvips
-
       - name: Install dependencies
         run: bundle install
 
       - name: Setup database
         run: |
-          bundle exec rails db:create
-          bundle exec rails db:migrate
+          bundle exec rails db:prepare
 
       - name: Check zeitwerk
         run: bundle exec rails zeitwerk:check
@@ -60,14 +52,17 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby
         with:
           bundler-cache: true
+
       - name: Install libvips
         run: |
           sudo apt-get update
           sudo apt-get install -y libvips
+
       - name: Install dependencies
         run: bundle install
 
