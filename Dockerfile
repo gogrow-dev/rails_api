@@ -51,6 +51,8 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Final stage for app image
 FROM base
 
+ARG KAMAL_VERSION
+
 # Install packages needed for deployment
 RUN --mount=type=cache,id=dev-apt-cache,sharing=locked,target=/var/cache/apt \
     --mount=type=cache,id=dev-apt-lib,sharing=locked,target=/var/lib/apt \
@@ -66,6 +68,9 @@ RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R 1000:1000 db log storage tmp
 USER 1000:1000
+
+# Set the version of Kamal deployment
+ENV KAMAL_VERSION=$KAMAL_VERSION
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]

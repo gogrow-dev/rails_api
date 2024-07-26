@@ -15,7 +15,13 @@
 - Config your timezone accordingly in `application.rb`.
 
 ---
+# Generators
+This base has some generators to help you get started faster:
+- `bin/rails g address` to generate an address model (be sure to check out the generated spec/factories/addresses.rb, and modify the addressable field)
+- `bin/rails g heroku` to generate a heroku configuration
+- `bin/rails g sentry` to generate a sentry configuration (be sure to set the SENTRY_DSN env variable)
 
+---
 # CI
 
 This base uses Github Actions by default as the CI tool.
