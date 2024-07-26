@@ -10,11 +10,11 @@ servers:
     hosts:
       - 127.0.0.1
     labels:
-      traefik.http.routers.gbg_api.rule: Host(`api.rails-api.com`)
-      traefik.http.routers.gbg_api_secure.entrypoints: websecure
-      traefik.http.routers.gbg_api_secure.rule: Host(`api.rails-api.com`)
-      traefik.http.routers.gbg_api_secure.tls: true
-      traefik.http.routers.gbg_api_secure.tls.certresolver: letsencrypt
+      traefik.http.routers.rails_api.rule: Host(`api.rails-api.com`)
+      traefik.http.routers.rails_api_secure.entrypoints: websecure
+      traefik.http.routers.rails_api_secure.rule: Host(`api.rails-api.com`)
+      traefik.http.routers.rails_api_secure.tls: true
+      traefik.http.routers.rails_api_secure.tls.certresolver: letsencrypt
   job:
     hosts:
       - 127.0.0.1
@@ -53,14 +53,12 @@ builder:
   args:
     RUBY_VERSION: <%= %x(cat .ruby-version).strip %>
     RAILS_ENV: production
-  multiarch: false
+    KAMAL_VERSION: <%= %x(echo $KAMAL_VERSION).strip %>
+  multiarch: true
   local:
     arch: amd64
   cache:
     type: gha
-  # remote:
-  #   arch: amd64
-  #   host: ssh://ubuntu@34.233.47.38
 
 # Configure custom arguments for Traefik logging to CloudWatch.
 # logging:

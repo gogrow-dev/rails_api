@@ -1,0 +1,8 @@
+Description:
+    Adds Sentry configuration to your Rails application.
+
+Example:
+    bin/rails generate sentry
+
+    This will create:
+      config/initializers/sentry.rb
