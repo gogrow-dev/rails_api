@@ -255,4 +255,5 @@ Go to Heroku and setup the app to auto-deploy from the `main` branch, and make s
 rails_api is maintained by [GoGrow](https://gogrow.dev) with the help of our
 [contributors](https://github.com/gogrow-dev/rails_api/contributors).
 
-[<img src="https://github.com/user-attachments/assets/fdf4c997-1595-4f18-9ba0-14e8f7e1b3df" height="50"/>](https://gogrow.dev)
+[<img src="https://github.com/user-attachments/assets/b0d188c4-46bc-47bc-ae84-7210093fb2f2" height="50"/>](https://gogrow.dev)
+
