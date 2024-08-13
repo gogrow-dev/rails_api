@@ -253,6 +253,6 @@ Go to Heroku and setup the app to auto-deploy from the `main` branch, and make s
 ## Credits
 
 rails_api is maintained by [GoGrow](https://gogrow.dev) with the help of our
-[contributors](https://github.com/gogrow-dev/prest/contributors).
+[contributors](https://github.com/gogrow-dev/rails_api/contributors).
 
 [<img src="https://github.com/user-attachments/assets/fdf4c997-1595-4f18-9ba0-14e8f7e1b3df" height="50"/>](https://gogrow.dev)
