@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby file: '.ruby-version'
 
-gem 'rails', '~> 7.1', '>= 7.1.3.4'
+gem 'rails', '~> 7.2'
 
 gem 'aws-sdk-s3', '~> 1.122'
 gem 'blueprinter', '~> 1.0', '>= 1.0.2'
