@@ -43,9 +43,12 @@ module RailsApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    # reenable cookies and sessions for web interfaces (sidekiq web and admin portals)
+    # reenable cookies, sessions, flashes and form submissions with methods other than POST/GET.
+    # These are necessary for web interfaces (sidekiq web and some/most admin panels)
     config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.insert_after(Rack::Runtime, Rack::MethodOverride)
     config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
 
     config.require_master_key = false
