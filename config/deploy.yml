@@ -29,11 +29,11 @@ registry:
 env:
   clear:
     RAILS_ENV: production
+    SERVER_HOST: api.rails-api.com
+    FRONTEND_URL: https://rails-api.com
+    MAILER_SENDER: "Rails API <info@rails-api.com>"
   secret:
-    - SERVER_HOST
     - JWT_SECRET
-    - FRONTEND_URL
-    - MAILER_SENDER
     - DATABASE_URL
     - REDIS_URL
     - S3_ACCESS_KEY_ID
@@ -58,7 +58,7 @@ builder:
   local:
     arch: amd64
   cache:
-    type: gha
+    type: registry
 
 # Configure custom arguments for Traefik logging to CloudWatch.
 # logging:
