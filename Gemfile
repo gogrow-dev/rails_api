@@ -7,6 +7,7 @@ ruby file: '.ruby-version'
 
 gem 'rails', '~> 7.2'
 
+gem 'activeadmin', '~> 3.2', '>= 3.2.4'
 gem 'aws-sdk-s3', '~> 1.122'
 gem 'blueprinter', '~> 1.0', '>= 1.0.2'
 gem 'bootsnap', '~> 1.18', '>= 1.18.3', require: false
@@ -18,6 +19,7 @@ gem 'puma', '~> 6.4', '>= 6.4.2'
 gem 'rack-cors', '~> 2.0', '>= 2.0.2'
 gem 'redis', '~> 5.2'
 gem 'ruby-vips', '~> 2.2', '>= 2.2.1'
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 gem 'sidekiq', '~> 7.3'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'warped', '~> 1.0.0'
