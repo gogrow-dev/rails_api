@@ -16,6 +16,8 @@ require 'action_view/railtie'
 require 'action_cable/engine'
 # require "rails/test_unit/railtie"
 
+require_relative '../lib/middlewares/silence_request'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -50,6 +52,9 @@ module RailsApi
     config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.insert_after(Rack::Runtime, Rack::MethodOverride)
     config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
+
+    # Silence requests made to the /up (healthcheck) path
+    config.middleware.insert_before Rails::Rack::Logger, SilenceRequest, path: '/up'
 
     config.require_master_key = false
   end
