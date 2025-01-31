@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby file: '.ruby-version'
 
-gem 'rails', '~> 7.2'
+gem 'rails', '~> 8.0.1'
 
 gem 'aws-sdk-s3', '~> 1.122'
 gem 'blueprinter', '~> 1.0', '>= 1.0.2'
@@ -20,10 +20,10 @@ gem 'redis', '~> 5.2'
 gem 'ruby-vips', '~> 2.2', '>= 2.2.1'
 gem 'sidekiq', '~> 7.3'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'warped', '~> 1.0.0'
+gem 'warped', '~> 1.0.1'
 
 group :development, :test do
-  gem 'bullet', '~> 7.1', '>= 7.1.6'
+  gem 'bullet', '~> 8.0'
   gem 'debug', '~> 1.9', '>= 1.9.2', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.2'
   gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
@@ -34,7 +34,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'annotate', '~> 3.2'
+  gem 'annotaterb', '~> 4.13'
   gem 'dockerfile-rails', '~> 1.6', '>= 1.6.17'
   gem 'letter_opener', '~> 1.10'
 end
