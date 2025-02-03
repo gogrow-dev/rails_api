@@ -21,9 +21,27 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+# sqlite: &sqlite
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
+
 development:
-  <<: *default
-  database: rails_api_development
+  primary:
+    <<: *default
+    database: rails_api_development
+  # cache:
+  #   <<: *sqlite
+  #   database: storage/rails_api_development_cache.sqlite3
+  #   migrations_paths: db/cache_migrate
+  # cable:
+  #   <<: *sqlite
+  #   database: storage/rails_api_development_cable.sqlite3
+  #   migrations_paths: db/cable_migrate
+  # queue:
+  #   <<: *sqlite
+  #   database: storage/rails_api_development_queue.sqlite3
+  #   migrations_paths: db/queue_migrate
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,7 +98,39 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  primary: &primary_production
+    <<: *default
+    database: rails_api_production
+    username: rails_api
+    password: <%= ENV["RAILS_API_DATABASE_PASSWORD"] %>
+  # cache:
+  #   <<: *sqlite
+  #   database: storage/life_task_planner_production_cache.sqlite3
+  #   migrations_paths: db/cache_migrate
+  # cable:
+  #   <<: *sqlite
+  #   database: storage/life_task_planner_production_cable.sqlite3
+  #   migrations_paths: db/cable_migrate
+  # queue:
+  #   <<: *sqlite
+  #   database: storage/life_task_planner_production_queue.sqlite3
+  #   migrations_paths: db/queue_migrate
 
 staging:
-  <<: *default
+  primary: &primary_staging
+    <<: *default
+    database: rails_api_staging
+    username: rails_api
+    password: <%= ENV["RAILS_API_DATABASE_PASSWORD"] %>
+  # cache:
+  #   <<: *sqlite
+  #   database: storage/life_task_planner_staging_cache.sqlite3
+  #   migrations_paths: db/cache_migrate
+  # cable:
+  #   <<: *sqlite
+  #   database: storage/life_task_planner_staging_cable.sqlite3
+  #   migrations_paths: db/cable_migrate
+  # queue:
+  #   <<: *sqlite
+  #   database: storage/life_task_planner_staging_queue.sqlite3
+  #   migrations_paths: db/queue_migrate

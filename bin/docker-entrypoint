@@ -1,15 +1,14 @@
 #!/bin/bash -e
 
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
+# Enable jemalloc for reduced memory usage and latency.
+if [ -z "${LD_PRELOAD+x}" ]; then
+    LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
+    export LD_PRELOAD
 fi
 
-if [ -f tmp/pids/server.pid ]; then
-  # if there's no process with the server.pid then remove the file
-  if ! ps $(cat tmp/pids/server.pid) > /dev/null; then
-    rm tmp/pids/server.pid
-  fi
+# If running the rails server then create or migrate existing database
+if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+  ./bin/rails db:prepare
 fi
 
 exec "${@}"
