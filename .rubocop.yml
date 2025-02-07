@@ -1,6 +1,9 @@
 require: rubocop-rails
 
-inherit_from: .rubocop.todo.yml
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
+# Your own specialized rules go here
 
 AllCops:
   NewCops: enable
