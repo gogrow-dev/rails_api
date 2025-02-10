@@ -29,7 +29,7 @@ RSpec.describe 'GET /api/v1/users/confirmation?confirmation_token', type: :reque
 
     it 'returns an error message' do
       subject
-      expect(json[:confirmation_token]).to eq(['is invalid'])
+      expect(json[:confirmation_token]).to eq([ 'is invalid' ])
     end
 
     it 'does not confirm the user' do

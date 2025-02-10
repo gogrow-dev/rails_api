@@ -45,7 +45,7 @@ class ApplicationQuery
     attr_writer :query_model_name
 
     def query_model_name
-      @query_model_name ||= name.sub(/::[^:]+$/, '')
+      @query_model_name ||= name.sub(/::[^:]+$/, "")
     end
 
     def query_model

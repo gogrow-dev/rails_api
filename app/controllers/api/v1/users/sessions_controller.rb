@@ -23,7 +23,7 @@ module Api
         end
 
         def log_out_failure
-          render json: { error: 'You need to sign in or sign up before continuing.' }, status: :unauthorized
+          render json: { error: "You need to sign in or sign up before continuing." }, status: :unauthorized
         end
       end
     end

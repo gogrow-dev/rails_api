@@ -38,7 +38,7 @@ RSpec.describe 'POST /api/v1/users/password', type: :request do
 
     it 'returns an error message' do
       subject
-      expect(json[:errors][:email]).to eq(['not found'])
+      expect(json[:errors][:email]).to eq([ 'not found' ])
     end
 
     it 'does not send an email' do

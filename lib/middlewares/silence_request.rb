@@ -20,7 +20,7 @@ class SilenceRequest
   end
 
   def call(env)
-    if env['PATH_INFO'] == @path
+    if env["PATH_INFO"] == @path
       Rails.logger.silence { @app.call(env) }
     else
       @app.call(env)

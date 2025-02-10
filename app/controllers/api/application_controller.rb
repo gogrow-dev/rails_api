@@ -29,7 +29,7 @@ module Api
 
     def render_parameter_missing(exception)
       Rails.logger.info { exception }
-      render json: { error: 'A required parameter is missing' }, status: :unprocessable_entity
+      render json: { error: "A required parameter is missing" }, status: :unprocessable_entity
     end
 
     def render_bad_request(exception)

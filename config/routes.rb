@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'up' => 'rails/health#show', as: :rails_health_check
+  get "up" => "rails/health#show", as: :rails_health_check
 
   defaults format: :html do
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web => "/sidekiq"
 
     # Uncomment when using AdminUser devise model for authenticated admin panels
     # devise_for :admin_users, only: %i[sessions password], controllers: {
@@ -14,11 +14,11 @@ Rails.application.routes.draw do
     # root to: '/admin'
   end
 
-  devise_for :users, path: 'api/v1/users', defaults: { format: :json }, controllers: {
-    confirmations: 'api/v1/users/confirmations',
-    sessions: 'api/v1/users/sessions',
-    registrations: 'api/v1/users/registrations',
-    passwords: 'api/v1/users/passwords'
+  devise_for :users, path: "api/v1/users", defaults: { format: :json }, controllers: {
+    confirmations: "api/v1/users/confirmations",
+    sessions: "api/v1/users/sessions",
+    registrations: "api/v1/users/registrations",
+    passwords: "api/v1/users/passwords"
   }
 
   namespace :api, defaults: { format: :json } do

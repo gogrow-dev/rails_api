@@ -1,10 +1,20 @@
 require: rubocop-rails
 
-inherit_from: .rubocop.todo.yml
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
+# Your own specialized rules go here
 
 AllCops:
   NewCops: enable
   SuggestExtensions: false
+  Exclude:
+    - db/schema.rb
+    - bin/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - log/**/*
+    - config/initializers/*
 
 Layout/LineLength:
   Max: 160
@@ -13,6 +23,10 @@ Layout/LineLength:
     - '\A#'
   Exclude:
     - db/migrate/*
+
+Lint/AssignmentInCondition:
+  Exclude:
+    - db/migrate/20250131123310_add_service_name_to_active_storage_blobs.active_storage.rb
 
 Metrics/AbcSize:
   Max: 19
@@ -53,6 +67,10 @@ Rails/Output:
 
 Rails/ScopeArgs:
   Enabled: false
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - db/migrate/20250131123310_add_service_name_to_active_storage_blobs.active_storage.rb
 
 Rails/UnknownEnv:
   Environments:

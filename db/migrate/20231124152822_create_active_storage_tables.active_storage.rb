@@ -21,7 +21,7 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.1]
         t.datetime :created_at, null: false
       end
 
-      t.index [:key], unique: true
+      t.index [ :key ], unique: true
     end
 
     create_table :active_storage_attachments, id: primary_key_type do |t|
@@ -55,6 +55,6 @@ class CreateActiveStorageTables < ActiveRecord::Migration[7.1]
     setting = config.options[config.orm][:primary_key_type]
     primary_key_type = setting || :primary_key
     foreign_key_type = setting || :bigint
-    [primary_key_type, foreign_key_type]
+    [ primary_key_type, foreign_key_type ]
   end
 end

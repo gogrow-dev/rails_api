@@ -20,7 +20,7 @@ module FakeSession
     private
 
     def set_fake_rack_session_for_devise
-      request.env['rack.session'] ||= FakeRackSession.new
+      request.env["rack.session"] ||= FakeRackSession.new
     end
   end
 end

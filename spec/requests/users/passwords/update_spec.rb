@@ -39,7 +39,7 @@ RSpec.describe 'PUT /api/v1/users/password?reset_password_token', type: :request
 
       it 'returns an error message' do
         subject
-        expect(json[:errors][:reset_password_token]).to eq(['is invalid'])
+        expect(json[:errors][:reset_password_token]).to eq([ 'is invalid' ])
       end
 
       it 'does not update the password' do
@@ -57,7 +57,7 @@ RSpec.describe 'PUT /api/v1/users/password?reset_password_token', type: :request
 
       it 'returns an error message' do
         subject
-        expect(json[:errors][:password]).to eq(["can't be blank"])
+        expect(json[:errors][:password]).to eq([ "can't be blank" ])
       end
 
       it 'does not update the password' do
@@ -75,7 +75,7 @@ RSpec.describe 'PUT /api/v1/users/password?reset_password_token', type: :request
 
       it 'returns an error message' do
         subject
-        expect(json[:errors][:password]).to eq(['is too short (minimum is 6 characters)'])
+        expect(json[:errors][:password]).to eq([ 'is too short (minimum is 6 characters)' ])
       end
 
       it 'does not update the password' do
