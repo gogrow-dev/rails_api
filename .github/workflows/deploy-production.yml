@@ -1,8 +1,7 @@
 name: Deploy to production
 
 env:
-  RAILS_ENV: production
-  SSH_PRODUCTION_PRIVATE_KEY: ${{ secrets.SSH_PRODUCTION_PRIVATE_KEY }}
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -12,9 +11,9 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Branch to deploy"
+        description: 'Branch to deploy'
         required: true
-        default: "main"
+        default: 'main'
 
 jobs:
   build_and_deploy:
@@ -29,7 +28,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: |
-            ${{ env.SSH_PRODUCTION_PRIVATE_KEY }}
+            ${{ env.SSH_PRIVATE_KEY }}
 
       - name: Install docker buildx
         uses: docker/setup-buildx-action@v2
@@ -49,13 +48,6 @@ jobs:
       - name: Install kamal
         run: gem install kamal
 
-      - name: Run kamal envify targeting production
-        run: kamal envify
-
-      - name: Run Kamal deploy targeting production
-        env:
-          KAMAL_ENV: ${{ env.RAILS_ENV }}
-          RAILS_ENV: ${{ env.RAILS_ENV }}
-          AWS_ACCOUNT_ID: ${{ env.AWS_ACCOUNT_ID }}
-          DOCKER_BUILDKIT: 1
-        run: kamal deploy
+      - name: Deploy to Production
+        run: |
+          kamal deploy
