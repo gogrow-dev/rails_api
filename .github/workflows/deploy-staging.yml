@@ -1,7 +1,6 @@
 name: Deploy to staging
 
 env:
-  RAILS_ENV: staging
   SSH_STAGING_PRIVATE_KEY: ${{ secrets.SSH_STAGING_PRIVATE_KEY }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -12,16 +11,16 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Branch to deploy"
+        description: 'Branch to deploy'
         required: true
-        default: "main"
+        default: 'main'
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ inputs.branch }}
 
@@ -49,13 +48,6 @@ jobs:
       - name: Install kamal
         run: gem install kamal
 
-      - name: Run kamal envify targeting staging
-        run: kamal envify -d staging
-
-      - name: Run Kamal deploy targeting staging
-        env:
-          KAMAL_ENV: ${{ env.RAILS_ENV }}
-          RAILS_ENV: ${{ env.RAILS_ENV }}
-          AWS_ACCOUNT_ID: ${{ env.AWS_ACCOUNT_ID }}
-          DOCKER_BUILDKIT: 1
-        run: kamal deploy -d staging
+      - name: Deploy to Staging
+        run: |
+          kamal deploy -d staging
